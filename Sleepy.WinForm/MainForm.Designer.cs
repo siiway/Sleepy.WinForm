@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             tbURL = new TextBox();
             btnOffline = new Button();
             tbDelay = new TextBox();
@@ -204,35 +205,35 @@
             // saveConfigToolStripMenuItem
             // 
             saveConfigToolStripMenuItem.Name = "saveConfigToolStripMenuItem";
-            saveConfigToolStripMenuItem.Size = new Size(359, 44);
+            saveConfigToolStripMenuItem.Size = new Size(358, 44);
             saveConfigToolStripMenuItem.Text = "Save config...";
             saveConfigToolStripMenuItem.Click += saveConfigToolStripMenuItem_Click;
             // 
             // loadConfigToolStripMenuItem
             // 
             loadConfigToolStripMenuItem.Name = "loadConfigToolStripMenuItem";
-            loadConfigToolStripMenuItem.Size = new Size(359, 44);
+            loadConfigToolStripMenuItem.Size = new Size(358, 44);
             loadConfigToolStripMenuItem.Text = "Load config...";
             loadConfigToolStripMenuItem.Click += loadConfigToolStripMenuItem_Click;
             // 
             // restartToolStripMenuItem
             // 
             restartToolStripMenuItem.Name = "restartToolStripMenuItem";
-            restartToolStripMenuItem.Size = new Size(359, 44);
+            restartToolStripMenuItem.Size = new Size(358, 44);
             restartToolStripMenuItem.Text = "Restart";
             restartToolStripMenuItem.Click += restartToolStripMenuItem_Click;
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(359, 44);
+            exitToolStripMenuItem.Size = new Size(358, 44);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
             // startNewToolStripMenuItem
             // 
             startNewToolStripMenuItem.Name = "startNewToolStripMenuItem";
-            startNewToolStripMenuItem.Size = new Size(359, 44);
+            startNewToolStripMenuItem.Size = new Size(358, 44);
             startNewToolStripMenuItem.Text = "Start new instance";
             startNewToolStripMenuItem.Click += startNewToolStripMenuItem_Click;
             // 
@@ -256,6 +257,7 @@
             Controls.Add(label1);
             Controls.Add(tbURL);
             Controls.Add(menuStrip);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip;
             Name = "MainForm";
             Text = "Sleepy WinForm Client";
