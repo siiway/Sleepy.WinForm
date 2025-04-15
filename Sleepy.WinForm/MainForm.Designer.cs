@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             tbURL = new TextBox();
-            label1 = new Label();
             btnOffline = new Button();
             tbDelay = new TextBox();
             tbAPI = new TextBox();
@@ -42,29 +41,28 @@
             tbDeviceName = new TextBox();
             btnOnlineRequestLoop = new Button();
             llConsole = new LinkLabel();
+            label1 = new Label();
+            menuStrip = new MenuStrip();
+            toolStripMenuItemFile = new ToolStripMenuItem();
+            saveConfigToolStripMenuItem = new ToolStripMenuItem();
+            loadConfigToolStripMenuItem = new ToolStripMenuItem();
+            restartToolStripMenuItem = new ToolStripMenuItem();
+            exitToolStripMenuItem = new ToolStripMenuItem();
+            startNewToolStripMenuItem = new ToolStripMenuItem();
+            menuStrip.SuspendLayout();
             SuspendLayout();
             // 
             // tbURL
             // 
-            tbURL.Location = new Point(25, 85);
+            tbURL.Location = new Point(25, 115);
             tbURL.Name = "tbURL";
             tbURL.PlaceholderText = "http://127.0.0.1:9010";
             tbURL.Size = new Size(492, 38);
             tbURL.TabIndex = 0;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Cascadia Code", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(12, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(419, 63);
-            label1.TabIndex = 1;
-            label1.Text = "Sleepy.WinForm";
-            // 
             // btnOffline
             // 
-            btnOffline.Location = new Point(1005, 249);
+            btnOffline.Location = new Point(1005, 279);
             btnOffline.Name = "btnOffline";
             btnOffline.Size = new Size(182, 96);
             btnOffline.TabIndex = 2;
@@ -74,7 +72,7 @@
             // 
             // tbDelay
             // 
-            tbDelay.Location = new Point(24, 139);
+            tbDelay.Location = new Point(24, 169);
             tbDelay.Name = "tbDelay";
             tbDelay.PlaceholderText = "2 [milliseconds] [int only]";
             tbDelay.Size = new Size(493, 38);
@@ -83,7 +81,7 @@
             // 
             // tbAPI
             // 
-            tbAPI.Location = new Point(24, 193);
+            tbAPI.Location = new Point(24, 223);
             tbAPI.Name = "tbAPI";
             tbAPI.PasswordChar = '*';
             tbAPI.PlaceholderText = "API secret";
@@ -93,7 +91,7 @@
             // tbShowPassword
             // 
             tbShowPassword.Font = new Font("Segoe Fluent Icons", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tbShowPassword.Location = new Point(475, 190);
+            tbShowPassword.Location = new Point(475, 220);
             tbShowPassword.Name = "tbShowPassword";
             tbShowPassword.Size = new Size(42, 38);
             tbShowPassword.TabIndex = 6;
@@ -103,7 +101,7 @@
             // 
             // btnOnlineRequest
             // 
-            btnOnlineRequest.Location = new Point(533, 248);
+            btnOnlineRequest.Location = new Point(533, 278);
             btnOnlineRequest.Name = "btnOnlineRequest";
             btnOnlineRequest.Size = new Size(444, 97);
             btnOnlineRequest.TabIndex = 7;
@@ -113,7 +111,7 @@
             // 
             // tbFakeAppName
             // 
-            tbFakeAppName.Location = new Point(533, 190);
+            tbFakeAppName.Location = new Point(533, 220);
             tbFakeAppName.Name = "tbFakeAppName";
             tbFakeAppName.PlaceholderText = "Ur fake application";
             tbFakeAppName.Size = new Size(444, 38);
@@ -121,7 +119,7 @@
             // 
             // cbOffline
             // 
-            cbOffline.Location = new Point(1005, 22);
+            cbOffline.Location = new Point(1005, 52);
             cbOffline.Name = "cbOffline";
             cbOffline.Size = new Size(182, 210);
             cbOffline.TabIndex = 9;
@@ -131,7 +129,7 @@
             // 
             // cbFakeApp
             // 
-            cbFakeApp.Location = new Point(533, 133);
+            cbFakeApp.Location = new Point(533, 163);
             cbFakeApp.Name = "cbFakeApp";
             cbFakeApp.Size = new Size(428, 44);
             cbFakeApp.TabIndex = 10;
@@ -141,7 +139,7 @@
             // 
             // tbDeviceID
             // 
-            tbDeviceID.Location = new Point(533, 22);
+            tbDeviceID.Location = new Point(533, 52);
             tbDeviceID.Name = "tbDeviceID";
             tbDeviceID.PlaceholderText = "DEVICE_ID";
             tbDeviceID.Size = new Size(444, 38);
@@ -149,7 +147,7 @@
             // 
             // tbDeviceName
             // 
-            tbDeviceName.Location = new Point(533, 76);
+            tbDeviceName.Location = new Point(533, 106);
             tbDeviceName.Name = "tbDeviceName";
             tbDeviceName.PlaceholderText = "Device Name";
             tbDeviceName.Size = new Size(444, 38);
@@ -157,7 +155,7 @@
             // 
             // btnOnlineRequestLoop
             // 
-            btnOnlineRequestLoop.Location = new Point(25, 249);
+            btnOnlineRequestLoop.Location = new Point(25, 279);
             btnOnlineRequestLoop.Name = "btnOnlineRequestLoop";
             btnOnlineRequestLoop.Size = new Size(492, 97);
             btnOnlineRequestLoop.TabIndex = 13;
@@ -168,7 +166,7 @@
             // llConsole
             // 
             llConsole.AutoSize = true;
-            llConsole.Location = new Point(411, 51);
+            llConsole.Location = new Point(411, 81);
             llConsole.Name = "llConsole";
             llConsole.Size = new Size(106, 31);
             llConsole.TabIndex = 14;
@@ -176,11 +174,73 @@
             llConsole.Text = "Console";
             llConsole.LinkClicked += llConsole_LinkClicked;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Cascadia Code", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(12, 39);
+            label1.Name = "label1";
+            label1.Size = new Size(419, 63);
+            label1.TabIndex = 1;
+            label1.Text = "Sleepy.WinForm";
+            // 
+            // menuStrip
+            // 
+            menuStrip.ImageScalingSize = new Size(32, 32);
+            menuStrip.Items.AddRange(new ToolStripItem[] { toolStripMenuItemFile });
+            menuStrip.Location = new Point(0, 0);
+            menuStrip.Name = "menuStrip";
+            menuStrip.Size = new Size(1209, 39);
+            menuStrip.TabIndex = 15;
+            menuStrip.Text = "Main Menu";
+            // 
+            // toolStripMenuItemFile
+            // 
+            toolStripMenuItemFile.DropDownItems.AddRange(new ToolStripItem[] { saveConfigToolStripMenuItem, loadConfigToolStripMenuItem, restartToolStripMenuItem, exitToolStripMenuItem, startNewToolStripMenuItem });
+            toolStripMenuItemFile.Name = "toolStripMenuItemFile";
+            toolStripMenuItemFile.Size = new Size(73, 35);
+            toolStripMenuItemFile.Text = "File";
+            // 
+            // saveConfigToolStripMenuItem
+            // 
+            saveConfigToolStripMenuItem.Name = "saveConfigToolStripMenuItem";
+            saveConfigToolStripMenuItem.Size = new Size(359, 44);
+            saveConfigToolStripMenuItem.Text = "Save config...";
+            saveConfigToolStripMenuItem.Click += saveConfigToolStripMenuItem_Click;
+            // 
+            // loadConfigToolStripMenuItem
+            // 
+            loadConfigToolStripMenuItem.Name = "loadConfigToolStripMenuItem";
+            loadConfigToolStripMenuItem.Size = new Size(359, 44);
+            loadConfigToolStripMenuItem.Text = "Load config...";
+            loadConfigToolStripMenuItem.Click += loadConfigToolStripMenuItem_Click;
+            // 
+            // restartToolStripMenuItem
+            // 
+            restartToolStripMenuItem.Name = "restartToolStripMenuItem";
+            restartToolStripMenuItem.Size = new Size(359, 44);
+            restartToolStripMenuItem.Text = "Restart";
+            restartToolStripMenuItem.Click += restartToolStripMenuItem_Click;
+            // 
+            // exitToolStripMenuItem
+            // 
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            exitToolStripMenuItem.Size = new Size(359, 44);
+            exitToolStripMenuItem.Text = "Exit";
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            // 
+            // startNewToolStripMenuItem
+            // 
+            startNewToolStripMenuItem.Name = "startNewToolStripMenuItem";
+            startNewToolStripMenuItem.Size = new Size(359, 44);
+            startNewToolStripMenuItem.Text = "Start new instance";
+            startNewToolStripMenuItem.Click += startNewToolStripMenuItem_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(14F, 31F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1209, 367);
+            ClientSize = new Size(1209, 403);
             Controls.Add(llConsole);
             Controls.Add(btnOnlineRequestLoop);
             Controls.Add(tbDeviceName);
@@ -195,9 +255,13 @@
             Controls.Add(btnOffline);
             Controls.Add(label1);
             Controls.Add(tbURL);
+            Controls.Add(menuStrip);
+            MainMenuStrip = menuStrip;
             Name = "MainForm";
             Text = "Sleepy WinForm Client";
             FormClosing += MainForm_FormClosing;
+            menuStrip.ResumeLayout(false);
+            menuStrip.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -205,7 +269,6 @@
         #endregion
 
         private TextBox tbURL;
-        private Label label1;
         private Button btnOffline;
         private TextBox tbDelay;
         private TextBox tbAPI;
@@ -218,5 +281,13 @@
         private TextBox tbDeviceName;
         private Button btnOnlineRequestLoop;
         private LinkLabel llConsole;
+        private Label label1;
+        private MenuStrip menuStrip;
+        private ToolStripMenuItem toolStripMenuItemFile;
+        private ToolStripMenuItem saveConfigToolStripMenuItem;
+        private ToolStripMenuItem loadConfigToolStripMenuItem;
+        private ToolStripMenuItem restartToolStripMenuItem;
+        private ToolStripMenuItem exitToolStripMenuItem;
+        private ToolStripMenuItem startNewToolStripMenuItem;
     }
 }

@@ -112,7 +112,7 @@ namespace Sleepy.WinForm
                 body = body.Replace("foreground_app_title", GetForegroundWindowTitle());
             }
             body = body.Replace("foreground_app_title", GetForegroundWindowTitle());
-            body = body.Replace("divice_display_name", tbDeviceName.Text);
+            body = body.Replace("device_display_name", tbDeviceName.Text);
             body = body.Replace("device_id", tbDeviceID.Text);
             return body;
         }
@@ -123,20 +123,20 @@ namespace Sleepy.WinForm
             body = body.Replace("foreground_app_title", "[DEVICE OFFLINE]");
             body = body.Replace("ur_secret", tbAPI.Text);
             body = body.Replace("foreground_app_title", string.Empty);
-            body = body.Replace("divice_display_name", tbDeviceName.Text);
+            body = body.Replace("device_display_name", tbDeviceName.Text);
             body = body.Replace("device_id", tbDeviceID.Text);
             return body;
         }
 
         private string requestString =
             @"
-        {
-            ""secret"": ""ur_secret"",
-            ""id"": ""device_id"",
-            ""show_name"": ""divice_display_name"",
-            ""using"": is_using,
-            ""app_name"": ""foreground_app_title""
-        }";
+{
+    ""secret"": ""ur_secret"",
+    ""id"": ""device_id"",
+    ""show_name"": ""device_display_name"",
+    ""using"": is_using,
+    ""app_name"": ""foreground_app_title""
+}";
 
         private string GetForegroundWindowTitle()
         {
@@ -215,7 +215,6 @@ namespace Sleepy.WinForm
 
         private async void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = true;
             if (!IsValidUrl(tbURL.Text))
             {
                 MessageBox.Show(
@@ -227,6 +226,7 @@ namespace Sleepy.WinForm
                 return;
             }
             await sendOfflineRequest();
+            e.Cancel = false;
         }
 
         private async void btnOffline_Click(object sender, EventArgs e)
@@ -287,6 +287,107 @@ namespace Sleepy.WinForm
         private void llConsole_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             setConsole();
+        }
+
+        private void saveConfigToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string content = configTemplate;
+            content = content.Replace("ur_server_url", tbURL.Text);
+            content = content.Replace("ur_secret", tbAPI.Text);
+            content = content.Replace("ur_delay", tbDelay.Text);
+            content = content.Replace("device_id", tbDeviceID.Text);
+            content = content.Replace("device_display_name", tbDeviceName.Text);
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+            saveFileDialog.Title = "Save Config File";
+            saveFileDialog.FileName = "config.json";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string path = saveFileDialog.FileName;
+                try
+                {
+                    File.WriteAllText(path, content);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        $"Error saving file: {ex.Message}",
+                        "Sleepy.WinForm",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                    return;
+                }
+            }
+        }
+
+        private string configTemplate =
+            @"
+{
+    ""url"": ""ur_server_url"",
+    ""secret"": ""ur_secret"",
+    ""delay"": ""ur_delay"",
+    ""id"": ""device_id"",
+    ""show_name"": ""device_display_name"",
+}";
+
+        private void loadConfigToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Load the config file
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+            openFileDialog.Title = "Load Config File";
+            openFileDialog.FileName = "config.json";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string path = openFileDialog.FileName;
+                try
+                {
+                    string content = File.ReadAllText(path);
+                    if (string.IsNullOrEmpty(content))
+                    {
+                        MessageBox.Show(
+                            "File is empty",
+                            "Sleepy.WinForm",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                        );
+                        return;
+                    }
+                    dynamic json = Newtonsoft.Json.JsonConvert.DeserializeObject(content);
+                    tbURL.Text = json.url;
+                    tbAPI.Text = json.secret;
+                    tbDelay.Text = json.delay;
+                    tbDeviceID.Text = json.id;
+                    tbDeviceName.Text = json.show_name;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        $"Error loading file:\n {ex.Message}",
+                        "Sleepy.WinForm",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                    return;
+                }
+            }
+        }
+
+        private void restartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(Application.ExecutablePath);
+            Environment.Exit(0);
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void startNewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(Application.ExecutablePath);
         }
     }
 }
