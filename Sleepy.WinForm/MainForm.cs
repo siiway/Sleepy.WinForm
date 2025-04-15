@@ -13,6 +13,7 @@ namespace Sleepy.WinForm
         }
 
         private bool consoleAllocated = false;
+
         private void setConsole()
         {
             if (!consoleAllocated)
@@ -25,12 +26,19 @@ namespace Sleepy.WinForm
             {
                 FreeConsole();
                 consoleAllocated = false;
-                MessageBox.Show("Console Freed", "Sleepy.WinForm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(
+                    "Console Freed",
+                    "Sleepy.WinForm",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
             }
         }
 
         [System.Runtime.InteropServices.DllImport("kernel32.dll", SetLastError = true)]
-        [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
+        [return: System.Runtime.InteropServices.MarshalAs(
+            System.Runtime.InteropServices.UnmanagedType.Bool
+        )]
         static extern bool AllocConsole();
 
         [System.Runtime.InteropServices.DllImport("Kernel32")]
@@ -42,7 +50,8 @@ namespace Sleepy.WinForm
         {
             if (Uri.TryCreate(url, UriKind.Absolute, out Uri uriResult))
             {
-                return uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps;
+                return uriResult.Scheme == Uri.UriSchemeHttp
+                    || uriResult.Scheme == Uri.UriSchemeHttps;
             }
             return false;
         }
@@ -119,7 +128,8 @@ namespace Sleepy.WinForm
             return body;
         }
 
-        private string requestString = @"
+        private string requestString =
+            @"
         {
             ""secret"": ""ur_secret"",
             ""id"": ""device_id"",
@@ -148,7 +158,12 @@ namespace Sleepy.WinForm
             {
                 if (!IsValidUrl(url))
                 {
-                    MessageBox.Show("Please enter a valid URL", "Sleepy.WinForm", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(
+                        "Please enter a valid URL",
+                        "Sleepy.WinForm",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
                     return Task.CompletedTask;
                 }
 
@@ -162,13 +177,23 @@ namespace Sleepy.WinForm
                 var response = client.SendAsync(request).Result;
                 if (!response.IsSuccessStatusCode)
                 {
-                    MessageBox.Show("Request failed with HTTP error code: \n" + response.StatusCode, "Sleepy.WinForm", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        "Request failed with HTTP error code: \n" + response.StatusCode,
+                        "Sleepy.WinForm",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
                 }
                 return Task.CompletedTask;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: \n {ex.Message}", "Sleepy.WinForm", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    $"Error: \n {ex.Message}",
+                    "Sleepy.WinForm",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
                 return Task.FromException(ex);
             }
         }
@@ -177,7 +202,12 @@ namespace Sleepy.WinForm
         {
             if (!IsValidUrl(tbURL.Text))
             {
-                MessageBox.Show("Please enter a valid URL", "Sleepy.WinForm", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "Please enter a valid URL",
+                    "Sleepy.WinForm",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
                 return;
             }
             sendOnlineRequest();
@@ -188,7 +218,12 @@ namespace Sleepy.WinForm
             e.Cancel = true;
             if (!IsValidUrl(tbURL.Text))
             {
-                MessageBox.Show("Please enter a valid URL", "Sleepy.WinForm", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "Please enter a valid URL",
+                    "Sleepy.WinForm",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
                 return;
             }
             await sendOfflineRequest();
@@ -202,9 +237,13 @@ namespace Sleepy.WinForm
             }
             else
             {
-                MessageBox.Show("Please check the offline checkbox and enter a valid URL", "Sleepy.WinForm", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "Please check the offline checkbox and enter a valid URL",
+                    "Sleepy.WinForm",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
             }
-
         }
 
         private async void btnOnlineRequestLoop_Click(object sender, EventArgs e)
@@ -212,7 +251,12 @@ namespace Sleepy.WinForm
             if (continueLoop)
             {
                 continueLoop = false;
-                MessageBox.Show("Loop stopped successfully!", "Sleepy.WinForm", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(
+                    "Loop stopped successfully!",
+                    "Sleepy.WinForm",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
             }
             else
             {
@@ -229,7 +273,12 @@ namespace Sleepy.WinForm
                 }
                 else
                 {
-                    MessageBox.Show("Please enter a valid URL", "Sleepy.WinForm", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(
+                        "Please enter a valid URL",
+                        "Sleepy.WinForm",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
                     break;
                 }
             }
